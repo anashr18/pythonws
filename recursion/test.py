@@ -1,13 +1,135 @@
-arr = [[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]
-def flatten(arr):
-    resultArr = []
-    for item in arr:
-        if type(item) is list:
-            resultArr.extend(flatten(item))
-        else:
-            resultArr.append(item)
-    return resultArr
-print(flatten(arr))
+obj = {
+  "stuff": 'foo',
+  "data": {
+    "val": {
+      "thing": {
+        "info": 'bar',
+        "moreInfo": {
+          "evenMoreInfo": {
+            "weMadeIt": 'baz'
+          }
+        }
+      }
+    }
+  }
+}
+ 
+def collectStrings(obj):
+    result = []
+    for key in obj:
+        if type(obj[key]) is dict:
+            result = result + collectStrings(obj[key])
+        elif type(obj[key]) is str:
+            result.append(obj[key])
+    return result
+print(collectStrings(obj))
+# def collectStrings(obj, result=[]):
+#     # result = []
+#     for key in obj:
+#         if type(obj[key]) is dict:
+#             collectStrings(obj[key])
+#         elif type(obj[key]) is str:
+#             result.append(obj[key])
+#     return result
+# print(collectStrings(obj))
+# obj = {
+#   "num": 1,
+#   "test": [1,2,3,4],
+#   "data": {
+#     "val": 4,
+#     "info": {
+#       "isRight": True,
+#       "random": 66
+#     }
+#   }
+# }
+ 
+# def stringifyNumbers(obj):
+#     for key in obj:
+#         if type(obj[key]) is dict:
+#             stringifyNumbers(obj[key])
+#         elif type(obj[key]) is int:
+#             obj[key] = str(obj[key])
+#         elif type(obj[key]) is list:
+#             obj[key] = list(map(str, obj[key]))
+#     return obj
+        
+# print(stringifyNumbers(obj))
+
+# words = ['i', 'am', 'learning', 'recursion']
+# def capitalizeWords(words):
+#     if len(words)==0:
+#         return []
+#     result = []
+#     result.append(words[0].upper())
+#     return result + capitalizeWords(words[1:])
+# print(capitalizeWords(words))
+# def capitalizeWords(words, result=[]):
+#     if len(words)==0:
+#         return []
+#     # result = []
+#     result.append(words[0].upper())
+#     capitalizeWords(words[1:])
+#     return result
+# print(capitalizeWords(words))
+# obj1 = {
+#   "outer": 2,
+#   "obj": {
+#     "inner": 2,
+#     "otherObj": {
+#       "superInner": 2,
+#       "notANumber": True,
+#       "alsoNotANumber": "yup"
+#     }
+#   }
+# }
+# obj2 = {
+#   "a": 2,
+#   "b": {"b": 2, "bb": {"b": 3, "bb": {"b": 2}}},
+#   "c": {"c": {"c": 2}, "cc": 'ball', "ccc": 5},
+#   "d": 1,
+#   "e": {"e": {"e": 2}, "ee": 'car'}
+# }
+obj3 = {
+#   "a": 2,
+    "b": {"b": 2, "bb": {"b": 3, "bb": {"b": 2}}}
+#   "c": {"c": {"c": 2}, "cc": 'ball', "ccc": 5},
+#   "d": 1,
+#   "e": {"e": {"e": 2}, "ee": 'car'}
+}
+# def nestedEvenSum(obj, sum=0):
+#     print("first", sum)
+#     for key in obj:
+#         print("in for", sum)
+#         if type(obj[key]) is dict:
+#             sum += nestedEvenSum(obj[key])
+#         elif type(obj[key]) is int and obj[key]%2==0:
+#             sum += obj[key]
+#     return sum 
+
+# nestedEvenSum(obj1)
+# print(nestedEvenSum(obj3))
+
+# arr = ['car', 'taco', 'banana']
+# def capitalizeFirst(arr):
+#     result = []
+#     if len(arr)==0:
+#         return result
+#     # for item in arr:
+#     result.append(arr[0][0].upper()+arr[0][1:])
+#     return result +(capitalizeFirst(arr[1:]))
+
+# print(capitalizeFirst(arr))
+# arr = [[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]
+# def flatten(arr):
+#     resultArr = []
+#     for item in arr:
+#         if type(item) is list:
+#             resultArr.extend(flatten(item))
+#         else:
+#             resultArr.append(item)
+#     return resultArr
+# print(flatten(arr))
 
 # def isOdd(n):
 #     if n%2 ==0:
