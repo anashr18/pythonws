@@ -41,6 +41,34 @@ class SLL:
             while node is not None:
                 print(str(node.value)+" ")
                 node = node.next
+    def deleteSLL(self, loc):
+        
+        if loc==0:
+            if self.head ==self.tail:
+                self.head=None
+                self.tail=None
+            else:
+                self.head = self.head.next
+        elif loc==-1:
+            if self.head ==self.tail:
+                self.head=None
+                self.tail=None
+            else:
+                node = self.head
+                while node is not None:
+                    if node.next == self.tail:
+                        break
+                    node = node.next
+                self.tail = None
+                self.tail = node
+        else:
+            tempNode = self.head
+            index=0
+            while index <loc-1:
+                index+=1
+                tempNode = tempNode.next
+            nextNode = tempNode.next
+            tempNode.next = nextNode.next
 sll = SLL()
 sll.insertSLL(0,100)
 sll.insertSLL(0,80)
@@ -48,4 +76,7 @@ sll.insertSLL(0,50)
 sll.insertSLL(0,10)
 print([node.value for node in sll])
 sll.traverseSLL()
-    
+sll.deleteSLL(1)
+print([node.value for node in sll])
+sll.deleteSLL(2)
+print([node.value for node in sll])
