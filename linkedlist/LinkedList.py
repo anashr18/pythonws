@@ -5,7 +5,7 @@ class Node:
         self.next = None
         self.prev = None
     def __str__(self):
-        return self.value
+        return str(self.value)
 class CustomLL:
     def __init__(self, values=[]):
         self.head = None
@@ -28,6 +28,14 @@ class CustomLL:
     def __str__(self):
         values = [str(x.value) for x in self]
         return '->'.join(values)
+    def __len__(self):
+        node = self.head
+        length = 0
+        while node:
+            length+=1
+            node = node.next
+        return length
+            
     def generate(self, n , minVal, maxVal):
         self.head = None
         self.tail = None
@@ -35,5 +43,5 @@ class CustomLL:
             self.addLL(randint(minVal, maxVal))
         return self
 
-ll = CustomLL([1,2,3,4,56,7])
-print(ll)
+# ll = CustomLL([1,2,3,4,56,7])
+# print(ll)
