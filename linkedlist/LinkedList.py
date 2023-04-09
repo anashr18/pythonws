@@ -35,7 +35,6 @@ class CustomLL:
             length+=1
             node = node.next
         return length
-            
     def generate(self, n , minVal, maxVal):
         self.head = None
         self.tail = None
