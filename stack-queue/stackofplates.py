@@ -32,7 +32,6 @@ class StackPlate:
             self.push(randint(min, max))
         return self
     def popAtIndex(self, idx):
-        # idx-=1  
         if len(self.stack)<=idx-1:
             print("The stack at index "+str(idx)+" does not exist")
             return
