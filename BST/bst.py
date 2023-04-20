@@ -76,7 +76,6 @@ def deleteNode(root, value):
                     parentNode.right=None
                 break
             # node with two children -successor 
-            
             elif node.left is not None and node.right is not None:
                 print("successor")
                 node.value = findSuccessor(root)
@@ -88,10 +87,6 @@ def deleteNode(root, value):
                     parentNode.left=node.left if node.left is not None else node.right
                 else:
                     parentNode.right=node.right if node.right is not None else node.left
-                # if node.left==None:
-                #     parentNode.right=node.right
-                # else:
-                #     parentNode.left=node.left
                 break
 def findSuccessor(root):
     node=root.right
@@ -99,10 +94,12 @@ def findSuccessor(root):
     while node.left:
         parentNode = node
         node = node.left
-    if node.right is not None:
-        parentNode.right=node.right
+    # if node.right is not None:
+    #     parentNode.left=node.right
     # else:
     #     parentNode.left=None
+    # the above if else can be written in one line below..lol
+    parentNode.left= node.right
     return node.value
 
 bt = bstNode(100)
@@ -113,11 +110,20 @@ bt.insertNode(10)
 bt.insertNode(60)
 bt.insertNode(5)
 bt.insertNode(300)
+bt.insertNode(400)
+bt.insertNode(170)
+bt.insertNode(120)
+bt.insertNode(175)
+bt.insertNode(140)
+bt.insertNode(50)
+bt.insertNode(55)
+bt.insertNode(40)
 
 # preOrderTraversal(bt)
 # inOrderTraversal(bt)
 # postOrderTraversal(bt)
-levelOrderTraversal(bt)
-print("^^^^^^^^^^^")
-deleteNode(bt, 80)
-levelOrderTraversal(bt)
+# levelOrderTraversal(bt)
+# print("^^^^^^^^^^^")
+# deleteNode(bt, 800)
+# levelOrderTraversal(bt)
+inOrderTraversal(bt)
