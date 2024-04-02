@@ -119,48 +119,70 @@ class LinkedList:
             return
         node = self.head
         pos = 0
+        temp = None
+        if idx == 0:
+            temp = self.head
+            self.head = self.head.next
+            temp.next = None
+            if self.tail == temp:
+                self.tail = None
+        else:
+            while pos < idx - 1:
+                node = node.next
+                pos += 1
+            if node.next == self.tail:
+                temp = node.next
+                self.tail = node
+                self.tail.next = None
+            else:
+                temp = node.next
+                node.next = node.next.next
+        self.length -= 1
+        return temp
 
-        while pos < idx - 1:
-            node = node.next
-            pos += 1
-        node.next = node.next.next
+    def reverse(self):
+        if self.length == 0:
+            return
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+        before = None
+        while temp:
+            # init after counter
+            after = temp.next
+            # reversing the link
+            temp.next = before
+            # incrementing before counters
+            before = temp
+            # incrementing temp counter
+            temp = after
 
 
-# ll = LinkedList(2)
-# values = [2, 5, 6, 9, 10, 12, 13]
-# ll.appendAll(*values)
-# ll.appendAll(56, 43, 21, 90)
+my_linked_list = LinkedList(2)
+values = [2, 5, 6, 9, 10, 12, 13]
+my_linked_list.appendAll(*values)
+my_linked_list.appendAll(56, 43, 21, 90)
 
-# ll.printall()
+my_linked_list.print_list()
 
 
 ##########################################################
 ##   Test code below will print output to "User logs"   ##
 ##########################################################
 
+# my_linked_list = LinkedList(1)
+# my_linked_list.append(3)
+
+
 my_linked_list = LinkedList(1)
+my_linked_list.append(2)
 my_linked_list.append(3)
+my_linked_list.append(4)
 
-
-print("LL before insert():")
+print("LL before reverse():")
 my_linked_list.print_list()
-print(my_linked_list.head.value, my_linked_list.tail.value)
 
-my_linked_list.insert(1, 2)
-print(my_linked_list.head.value, my_linked_list.tail.value)
+my_linked_list.reverse()
 
-print("\nLL after insert(2) in middle:")
+print("\nLL after reverse():")
 my_linked_list.print_list()
-print(my_linked_list.head.value, my_linked_list.tail.value)
-
-my_linked_list.insert(0, 0)
-print(my_linked_list.head.value, my_linked_list.tail.value)
-print("\nLL after insert(0) at beginning:")
-my_linked_list.print_list()
-print(my_linked_list.head.value, my_linked_list.tail.value)
-
-my_linked_list.insert(4, 4)
-
-print("\nLL after insert(4) at end:")
-my_linked_list.print_list()
-print(my_linked_list.head.value, my_linked_list.tail.value)
