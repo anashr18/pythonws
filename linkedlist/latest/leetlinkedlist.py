@@ -113,6 +113,15 @@ class LinkedList:
             less_tail.next = greater_head
             self.head = less_head
 
+    def remove_duplicates(self):
+        currNode = self.head
+        item_set = set()
+        while currNode:
+            item_set.add(currNode.value)
+            currNode = currNode.next
+        print(item_set)
+        pass
+
 
 def find_kth_from_end(ll, k):
     slow = ll.head
@@ -135,13 +144,15 @@ def find_kth_from_end(ll, k):
 # my_linked_list.print_list()
 
 
-# my_linked_list = LinkedList(1)
-# my_linked_list.append(2)
-# my_linked_list.append(3)
-# my_linked_list.append(4)
-# my_linked_list.append(5)
+my_linked_list = LinkedList(1)
+my_linked_list.append(2)
+my_linked_list.append(3)
+my_linked_list.append(4)
+my_linked_list.append(5)
 
-# print(my_linked_list.find_middle_node().value)
+print(my_linked_list.find_middle_node().value)
+
+my_linked_list.remove_duplicates()
 
 
 # Function to convert linked list to Python list
