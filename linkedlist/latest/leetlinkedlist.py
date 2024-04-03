@@ -108,18 +108,24 @@ class LinkedList:
         return result
 
     def reverse_between(self, start, end):
-        before = self.head
-        for _ in range(start - 1):
+        # adding a dummy
+        dummy = Node(0)
+        dummy.next = self.head
+        before = dummy
+        for _ in range(start):
             ic(before.value)
             before = before.next
-            ic(before.value)
+            ic(before.value, dummy.next.value)
         temp = before.next
         for _ in range(end - start):
             after = temp.next
             temp.next = after.next
             after.next = before.next
             before.next = after
-            ic(before.value, temp.value, after.value)
+            ic(before.value, temp.value, after.value, self.head.value, dummy.next.value)
+        if start == 0:
+            # self.head = before.next
+            self.head = dummy.next
 
 
 def find_kth_from_end(ll, k):
@@ -141,5 +147,5 @@ my_linked_list.appendAll(*values)
 # my_linked_list.appendAll(56, 43, 21, 98)
 
 my_linked_list.print_list()
-my_linked_list.reverse_between(0, 6)
+my_linked_list.reverse_between(2, 6)
 my_linked_list.print_list()
