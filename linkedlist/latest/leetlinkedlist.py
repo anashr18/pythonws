@@ -55,37 +55,6 @@ class LinkedList:
                 return True
         return False
 
-    # def partition_list(self, x):
-    #     less_ll = None
-    #     greater_ll = None
-    #     node = self.head
-    #     while node:
-    #         if x > node.value:
-    #             if less_ll is None:
-    #                 less_ll = LinkedList(node.value)
-    #             else:
-    #                 less_ll.append(node.value)
-    #             ic(less_ll.print_list())
-    #         else:
-    #             if greater_ll is None:
-    #                 greater_ll = LinkedList(node.value)
-    #             else:
-    #                 greater_ll.append(node.value)
-    #             ic(greater_ll.print_list())
-    #         node = node.next
-
-    #     less_node = less_ll.head
-    #     ic(less_ll.head.value)
-    #     while less_node.next:
-    #         less_node = less_node.next
-    #     ic(less_node.value)
-    #     ic(greater_ll.head.value)
-    #     less_node.next = greater_ll.head
-    #     ic(less_ll.head.value)
-    #     less_ll.print_list()
-    #     self.head = less_ll.head
-    #     # return less_ll
-
     def partition_list(self, x):
         less_head = less_tail = None
         greater_head = greater_tail = None
@@ -114,13 +83,43 @@ class LinkedList:
             self.head = less_head
 
     def remove_duplicates(self):
-        currNode = self.head
+        if self.head is None or self.head.next is None:
+            return self.head
+        currNode = self.head.next
+        prevNode = self.head
         item_set = set()
+        item_set.add(prevNode.value)
         while currNode:
-            item_set.add(currNode.value)
+            if currNode.value in item_set:
+                prevNode.next = currNode.next
+            else:
+                item_set.add(currNode.value)
+                prevNode = currNode
             currNode = currNode.next
-        print(item_set)
-        pass
+        # print(item_set)
+        # pass
+
+    def binary_to_decimal(self):
+        result = 0
+        node = self.head
+        while node:
+            result = 2 * result + node.value
+            node = node.next
+        return result
+
+    def reverse_between(self, start, end):
+        before = self.head
+        for _ in range(start - 1):
+            ic(before.value)
+            before = before.next
+            ic(before.value)
+        temp = before.next
+        for _ in range(end - start):
+            after = temp.next
+            temp.next = after.next
+            after.next = before.next
+            before.next = after
+            ic(before.value, temp.value, after.value)
 
 
 def find_kth_from_end(ll, k):
@@ -136,168 +135,11 @@ def find_kth_from_end(ll, k):
     return slow
 
 
-# my_linked_list = LinkedList(2)
-# values = [2, 5, 6, 9, 10, 12, 13]
-# my_linked_list.appendAll(*values)
+my_linked_list = LinkedList(4)
+values = [2, 5, 6, 9, 10, 12, 13]
+my_linked_list.appendAll(*values)
 # my_linked_list.appendAll(56, 43, 21, 98)
 
-# my_linked_list.print_list()
-
-
-my_linked_list = LinkedList(1)
-my_linked_list.append(2)
-my_linked_list.append(3)
-my_linked_list.append(4)
-my_linked_list.append(5)
-
-print(my_linked_list.find_middle_node().value)
-
-my_linked_list.remove_duplicates()
-
-
-# Function to convert linked list to Python list
-def linkedlist_to_list(head):
-    result = []
-    current = head
-    while current:
-        result.append(current.value)
-        current = current.next
-    return result
-
-
-# Function to test partition_list
-def test_partition_list():
-    test_cases_passed = 0
-
-    print("-----------------------")
-
-    # Test 1: Normal Case
-    print("Test 1: Normal Case")
-    x = 3
-    print(f"x = {x}")
-    ll = LinkedList(3)
-    ll.append(1)
-    ll.append(4)
-    ll.append(2)
-    ll.append(5)
-    print("Before:", linkedlist_to_list(ll.head))
-    ll.partition_list(x)
-    print("After:", linkedlist_to_list(ll.head))
-    if linkedlist_to_list(ll.head) == [1, 2, 3, 4, 5]:
-        print("PASS")
-        test_cases_passed += 1
-    else:
-        print("FAIL")
-
-    print("-----------------------")
-
-    # Test 2: All Equal Values
-    print("Test 2: All Equal Values")
-    x = 3
-    print(f"x = {x}")
-    ll = LinkedList(3)
-    ll.append(3)
-    ll.append(3)
-    print("Before:", linkedlist_to_list(ll.head))
-    ll.partition_list(x)
-    print("After:", linkedlist_to_list(ll.head))
-    if linkedlist_to_list(ll.head) == [3, 3, 3]:
-        print("PASS")
-        test_cases_passed += 1
-    else:
-        print("FAIL")
-
-    print("-----------------------")
-
-    # Test 3: Single Element
-    print("Test 3: Single Element")
-    x = 3
-    print(f"x = {x}")
-    ll = LinkedList(1)
-    print("Before:", linkedlist_to_list(ll.head))
-    ll.partition_list(x)
-    print("After:", linkedlist_to_list(ll.head))
-    if linkedlist_to_list(ll.head) == [1]:
-        print("PASS")
-        test_cases_passed += 1
-    else:
-        print("FAIL")
-
-    print("-----------------------")
-
-    # Test 4: Already Sorted
-    print("Test 4: Already Sorted")
-    x = 2
-    print(f"x = {x}")
-    ll = LinkedList(1)
-    ll.append(2)
-    ll.append(3)
-    print("Before:", linkedlist_to_list(ll.head))
-    ll.partition_list(x)
-    print("After:", linkedlist_to_list(ll.head))
-    if linkedlist_to_list(ll.head) == [1, 2, 3]:
-        print("PASS")
-        test_cases_passed += 1
-    else:
-        print("FAIL")
-
-    print("-----------------------")
-
-    # Test 5: Reverse Sorted
-    print("Test 5: Reverse Sorted")
-    x = 2
-    print(f"x = {x}")
-    ll = LinkedList(3)
-    ll.append(2)
-    ll.append(1)
-    print("Before:", linkedlist_to_list(ll.head))
-    ll.partition_list(x)
-    print("After:", linkedlist_to_list(ll.head))
-    if linkedlist_to_list(ll.head) == [1, 3, 2]:
-        print("PASS")
-        test_cases_passed += 1
-    else:
-        print("FAIL")
-
-    print("-----------------------")
-
-    # Test 6: All Smaller Values
-    print("Test 6: All Smaller Values")
-    x = 2
-    print(f"x = {x}")
-    ll = LinkedList(1)
-    ll.append(1)
-    ll.append(1)
-    print("Before:", linkedlist_to_list(ll.head))
-    ll.partition_list(x)
-    print("After:", linkedlist_to_list(ll.head))
-    if linkedlist_to_list(ll.head) == [1, 1, 1]:
-        print("PASS")
-        test_cases_passed += 1
-    else:
-        print("FAIL")
-
-    print("-----------------------")
-
-    # Test 7: Single Element, Equal to Partition
-    print("Test 7: Single Element, Equal to Partition")
-    x = 3
-    print(f"x = {x}")
-    ll = LinkedList(3)
-    print("Before:", linkedlist_to_list(ll.head))
-    ll.partition_list(x)
-    print("After:", linkedlist_to_list(ll.head))
-    if linkedlist_to_list(ll.head) == [3]:
-        print("PASS")
-        test_cases_passed += 1
-    else:
-        print("FAIL")
-
-    print("-----------------------")
-
-    # Summary
-    print(f"{test_cases_passed} out of 7 tests passed.")
-
-
-# Run the test function
-test_partition_list()
+my_linked_list.print_list()
+my_linked_list.reverse_between(0, 6)
+my_linked_list.print_list()
