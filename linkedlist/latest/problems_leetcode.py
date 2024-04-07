@@ -31,17 +31,22 @@ class LinkedList:
             node = node.next
         pass
 
-    def insert(self, value, idx):
+    def insert(self, idx, value):
+        if idx < 0:
+            print("idx can not be negative")
+            return
         newNode = Node(value)
         dummy = Node(0)
         dummy.next = self.head
         currNode = dummy
         for _ in range(idx):
+            if currNode.next is None:
+                print("OOB error")
+                return
             currNode = currNode.next
         newNode.next = currNode.next
         currNode.next = newNode
-        if idx == 0:
-            self.head = dummy.next
+        self.head = dummy.next
 
     def remove(self, idx):
         if idx < 0:
@@ -184,13 +189,24 @@ class LinkedList:
         self.head = before
 
 
-my_linked_list = LinkedList(84)
-values = [120, 56, 67, 91, 48, 12, 13]
-my_linked_list.appendAll(*values)
-my_linked_list.appendAll(59)
-
+my_linked_list = LinkedList(3)
+# values = [7, 5, 1, 9, 13]
+# my_linked_list.appendAll(*values)
+# my_linked_list.appendAll(59)
 my_linked_list.print_list()
-my_linked_list.reverse_between(0, 8)
+my_linked_list.insert(6, 100)
 my_linked_list.print_list()
-my_linked_list.reverse()
+my_linked_list.insert(8, 99)
 my_linked_list.print_list()
+my_linked_list.insert(0, 111)
+my_linked_list.print_list()
+# my_linked_list.insert(8, 99)
+# my_linked_list.print_list()
+# my_linked_list.insert(0, 188)
+# my_linked_list.print_list()
+# my_linked_list.insert(0, 111)
+# my_linked_list.print_list()
+# # my_linked_list.insert(14, 222)
+# # my_linked_list.print_list()
+# my_linked_list.insert(13, 333)
+# my_linked_list.print_list()
